@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 25 April 2011 7:52:33 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.javacodegeeks.enterprise.hibernate.Class" table="class" 	catalog="bookstore4">
+		
+		<id name="classID" type="java.lang.Integer">
+			<column name="CLASS_ID" />
+			 <generator class="identity" />
+		</id>
+		
+		
+		<property name="title" type="string">
+			<column name="TITLE" length="100" not-null="true" unique = "true" />
+		</property>
+		
+		<property name="semester" type="string">
+			<column name="SEMESTER" length="100"  />
+		</property>
+		  
+		  <set name="assignedStudents" table="student_class" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CLASS_ID" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.javacodegeeks.enterprise.hibernate.Student">
+                <column name="ID_STUDENT" not-null="true" />
+            </many-to-many>
+        </set>
+		
+		
+	</class>
+</hibernate-mapping>
